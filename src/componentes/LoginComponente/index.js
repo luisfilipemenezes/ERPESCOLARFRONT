@@ -5,8 +5,10 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 
 export function LoginComponente() {
-  const [usuario, setUsername] = useState('Filipe@gmail.com');
+  const [usuario, setUsername] = useState();
   const [senha, setPassword] = useState('');
+
+
 
   async function handleSubmitForm(e) {
     e.preventDefault();
@@ -22,14 +24,14 @@ export function LoginComponente() {
 
       const data = await response.json();
       
+      if(data.token !== false){
+        localStorage.setItem('token', data.token);
+        localStorage.setItem('usuario', usuario);
+        alert('Login bem-sucedido!');
+      }else{
+        alert('Verifique seu email ou senha!')
+      }
       
-
-      localStorage.setItem('token', data.token);
-      alert('Login bem-sucedido!');
-      
-      
-      // Redirecionar para a página de destino após o login, se necessário
-      // history.push('/pagina-depois-do-login');
 
     } catch (err) {
       alert('Erro ao fazer Login: ' + err.message); // Exiba mensagem de erro detalhada

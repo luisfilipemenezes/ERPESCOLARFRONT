@@ -4,12 +4,13 @@ import { Button } from "flowbite-react";
 import { Toast } from "flowbite-react";
 import { HiCheck, HiExclamation, HiX } from "react-icons/hi";
 
-export default function FormularioAluno() {
+export default function FormularioAluno({openCadastro}) {
     const [age, setAge] = useState('');
     const [name, setName] = useState('');
     const [cpf, setCpf] = useState('');
     const [countAge, setCountAge] = useState([]);
     const [showSuccessToast, setShowSuccessToast] = useState(false);
+    
 
     useEffect(() => {
         // Função para preencher o array com números de 1 a 18 (por exemplo)
@@ -77,7 +78,7 @@ export default function FormularioAluno() {
                 <div className='h-1/6  items-center  flex'>
                     <p className='text-2xl font-bold'>Cadastrar Aluno</p>
                 </div>
-                <div className='h-1/6 items-center  flex'>
+                {openCadastro? <div><div className='h-1/6 items-center  flex'>
                 <Grid container spacing={2}>
                     <Grid item xs={12} sm={4}>
                         <FormControl fullWidth>
@@ -118,7 +119,7 @@ export default function FormularioAluno() {
                                 variant="outlined"
                                 InputProps={{
                                     inputProps: {
-                                        maxLength: 11, // Limita o número máximo de caracteres para CPF
+                                        maxLength: 4, // Limita o número máximo de caracteres para CPF
                                     },
                                     startAdornment: <InputAdornment position="start">CPF</InputAdornment>,
                                 }}
@@ -127,9 +128,9 @@ export default function FormularioAluno() {
                     </Grid>
                 </Grid>
                 </div>
-                <div className='h-1/6 items-center  flex'>
+                <div className='h-1/6 items-center mt-10 flex'>
                     <Button  onClick={handleSubmit} >Cadastrar</Button>
-                </div>
+                </div></div>: <div></div>}
                 {showSuccessToast && (
                 <Toast>
                     <div className="inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-green-100 text-green-500 dark:bg-green-800 dark:text-green-200">

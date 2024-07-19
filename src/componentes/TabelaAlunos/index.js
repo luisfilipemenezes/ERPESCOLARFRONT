@@ -37,9 +37,12 @@ export default function TabelaAlunos({ alunos }) {
     count();
 }, []);
 
-const handleID = (id) =>{
+const handleID = (id,name,age,cpf) =>{
   setOpenModal(true)
     SetId(id)
+    setName(name)
+    setAge(age)
+    setCpf(cpf)
 }
 
 const handleChangeAge = (event) => {
@@ -160,7 +163,7 @@ const handleSubmit = async () => {
                 <Table.Cell>{aluno.idade}</Table.Cell>
                 <Table.Cell>{aluno.cpf}</Table.Cell>
                 <Table.Cell>{aluno.status}</Table.Cell>
-                <Table.Cell onClick={() => handleID(aluno.id)}>
+                <Table.Cell onClick={() => handleID(aluno.id,aluno.nome,aluno.idade,aluno.cpf)}>
                   <a href="#" className="font-medium text-cyan-600 hover:underline dark:text-cyan-500">
                     Editar
                   </a>
@@ -198,6 +201,7 @@ const handleSubmit = async () => {
                                 id="demo-simple-select"
                                 value={age}
                                 label="Age"
+                                
                                 onChange={handleChangeAge}
                             >
                                 {countAge.map((number) => (
@@ -218,9 +222,9 @@ const handleSubmit = async () => {
                                 variant="outlined"
                                 InputProps={{
                                     inputProps: {
-                                        maxLength: 11, // Limita o número máximo de caracteres para CPF
+                                        maxLength: 4, // Limita o número máximo de caracteres para CPF
                                     },
-                                    startAdornment: <InputAdornment position="start">{alunoId}</InputAdornment>,
+                                    startAdornment: <InputAdornment position="start"></InputAdornment>,
                                 }}
                             />
                         </FormControl>
